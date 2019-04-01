@@ -1,0 +1,49 @@
+{% extends 'OJob/user/main.html'%}
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="/static/main/css/leavemessage.css">
+{% endblock linkscript%}
+{% block main%}
+
+    <form action="" class="dark-matter">
+        {% csrf_token %}
+        <h1></h1>
+        <label>
+        <span>用户名 :</span>
+        <input id="name" type="text" name="name" value={{username}} />
+        </label>
+        <label>
+        <span>主题 :</span>
+        <input  type="text" name="subject" />
+        </label>
+
+        <label>
+        <span>留言内容 :</span>
+        <textarea id="message" name="mge" ></textarea>
+        </label>
+        <label>
+        <span>&nbsp;</span>
+        <input type="submit" class="button" id="btn" value="Send" />
+        </label>
+    </form>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    document.getElementById("btn").onclick=
+    function(){
+      $.ajax({
+         type:"post",
+         url:"/perfect_leavemge/",
+         data:$(".dark-matter").serialize(),
+         dataType:"json",
+         success:function(data,status){
+            alert(data["data"])
+            if(data["data"]=="填写留言信息成功,请点击确定跳往主界面")
+            {
+               window.location.href="/main/"
+            }
+         }
+      })
+    }
+})
+</script>
+{% endblock main%}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="/static/main/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/main/css/bootstrap.min.css">
+
+  </head>
+
+  <body class="login">
+
+
+    <form action="/login/1/" class="dark-matter" style="margin-top: 240px;margin-left: 360px;">
+        {% csrf_token %}
+        <h1></h1>
+        <label>
+        <span>账号 :</span>
+        <input id="name" type="text" name="username"  />
+        </label>
+        <label>
+        <span>密码 :</span>
+        <input  type="text" name="passwd" />
+        </label>
+
+        <input type="submit" class="button" value="登陆" />
+        </label>
+    </form>
+        <a href="/register/">注册</a>
+  </body>
+</html>

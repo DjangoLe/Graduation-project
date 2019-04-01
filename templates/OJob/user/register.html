@@ -1,0 +1,64 @@
+{% extends 'OJob/user/main.html'%}
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="/static/main/css/resume.css">
+{% endblock linkscript%}
+{% block main%}
+
+<form id="payment" action="">
+    {% csrf_token %}
+    <fieldset>
+        <legend>用户注册</legend>
+        <ol>
+            <li>
+                <label>用户名：</label>
+                <input type="text" name="uname" id="uname"/>
+            </li>
+            <li>
+                <label>密码：</label>
+                <input type="text" name="passwd"/>
+            </li>
+            <li>
+                <label>申请类型：</label>
+                <a><input type="radio" name="apply" value="user" checked/>个人</a>
+                &nbsp&nbsp&nbsp
+                <a><input type="radio" name="apply" value="company"/>公司</a>
+            </li>
+            <li>
+                <label>电话：</label>
+                <input type="text" name="tel"/>
+            </li>
+
+            <li>
+                <label>地址：</label>
+                <input type="text" name="addrs"/>
+            </li>
+        </ol>
+    </fieldset>
+
+    <input  type="submit" id="btn" style="width:100px;margin-left:10px;" value="提交"/>
+
+
+</form>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    document.getElementById("btn").onclick=
+    function(){
+      alert($("#uname").val());
+      $.ajax({
+         type:"post",
+         url:"/perfect_register/",
+         data:$("#payment").serialize(),
+         dataType:"json",
+         success:function(data,status){
+            alert(data["data"])
+            if(data["data"]=="恭喜你注册成功,请点击确定跳往主界面")
+            {
+               window.location.href="/main/"
+            }
+         }
+      })
+    }
+})
+</script>
+{% endblock main%}

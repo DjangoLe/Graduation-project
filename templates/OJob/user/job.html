@@ -1,0 +1,41 @@
+{% extends 'OJob/user/main.html'%}
+{% block main%}
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="/static/main/css/job.css">
+{% endblock linkscript%}
+
+{% for item2 in jmlist1%}
+ <div class="jzList_item">
+     <div class="jzList_txt">
+                <div class="jzList_txt_t"><h4><a>{{item2.jposition}}</a></h4></div>
+                <div class="jzList_txt_field">
+                    <ul>
+                        <li><span>工作地点：</span>{{item2.jplace}}</li>
+                        <li><span>兼职类型：</span>{{item2.mgetype}}</li>
+                        <li><span>工作福利：</span>{{item2.boon}}</li>
+                        <li><span>招聘人数：</span>{{item2.jcount}}人</li>
+                    </ul>
+                </div>
+     </div>
+            <div class="jzList_salary">薪资:{{item2.jwages}} 元/月</div>
+            <div class="jzList_btn">
+                <a class="login-reg" href="/job_detail/">报名参加</a>
+            </div>
+ </div>
+ <div class="line"></div>
+
+{% endfor%}
+    <div class="center">
+      <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">7</a></li>
+        <li><a href="#">»</a></li>
+      </ul>
+    </div>
+{% endblock main%}

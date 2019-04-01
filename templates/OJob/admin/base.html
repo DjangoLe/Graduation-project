@@ -1,0 +1,228 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>APP开发者平台</title>
+
+	<!-- Bootstrap -->
+	<link href="/static/admin/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="/static/admin/css/font-awesome.min.css" rel="stylesheet">
+    {% block linkscript %}
+    {% endblock linkscript%}
+<link href="/static/admin/css/custom.min.css" rel="stylesheet">
+	<style>
+		.left_col{background:#2A3F54}
+		.nav-sm .container.body .col-md-3.left_col{min-height:100%;width:70px;padding:0;z-index:9999;position:absolute}
+		.nav-sm .container.body .col-md-3.left_col.menu_fixed{position:fixed;height:100%}
+		.nav-sm .container.body .col-md-3.left_col .mCSB_container,.nav-sm .container.body .col-md-3.left_col .mCustomScrollBox{overflow:visible}
+		.nav-sm .hidden-small{visibility:hidden}
+		.nav-sm .container.body .right_col{padding:10px 20px;margin-left:70px;z-index:2}
+		.nav-sm .navbar.nav_title{width:70px}.nav-sm .navbar.nav_title a span{display:none}
+		.nav-sm .navbar.nav_title a i{font-size:27px;margin:13px 0 0 3px}
+		.site_title i{border:1px solid #EAEAEA;padding:5px 6px;border-radius:50%}
+		.nav-sm .main_container .top_nav{display:block;margin-left:70px;z-index:2}
+		.nav-sm .nav.side-menu li a{text-align:center !important;font-weight:400;font-size:10px;padding:10px 5px}
+		.nav-sm .nav.child_menu li.active,.nav-sm .nav.side-menu li.active-sm{border-right:5px solid #1ABB9C}
+		.nav-sm ul.nav.child_menu ul,.nav-sm .nav.side-menu li.active-sm ul ul{position:static;width:200px;background:none}
+		.nav-sm>.nav.side-menu>li.active-sm>a{color:#1ABB9C !important}
+		.nav-sm .nav.side-menu li a i.toggle-up{display:none !important}
+		.nav-sm .nav.side-menu li a i{font-size:25px !important;text-align:center;width:100% !important;margin-bottom:5px}
+		.nav-sm ul.nav.child_menu{left:100%;position:absolute;top:0;width:210px;z-index:4000;background:#3E5367;display:none}
+		.nav-sm ul.nav.child_menu li{padding:0 10px}.nav-sm ul.nav.child_menu li a{text-align:left !important}
+	</style>
+</head>
+<body class="nav-md footer_fixed">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col menu_fixed">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+                        <a href="dev/flatform/main" class="site_title">&nbsp;&nbsp;&nbsp;<span>岁岁兼职网</span>
+						</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<!-- menu profile quick info -->
+					<div class="profile">
+						<div class="profile_pic">
+							<img
+								src="/static/admin/img/img1.jpg"
+								alt="..." class="img-circle profile_img"/>
+						</div>
+						
+						<div class="profile_info">
+							<span>Welcome,</span>
+							<h2>游客</h2>
+						</div>
+					</div>
+					<!-- /menu profile quick info -->
+
+					<br />
+
+					<!-- sidebar menu -->
+				<div id="sidebar-menu"
+						class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+							<h3>&nbsp; </h3>
+							<br/>
+							<ul class="nav side-menu">
+								<li><a><i class="fa fa-home"></i> 个人信息 <span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="/base/">修改密码</a>
+										</li>
+										<li><a href="javascript:;">修改信息</a>
+										</li>
+									</ul></li>
+								<li><a><i class="fa fa-edit"></i>简历信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">修改简历</a>
+										</li>
+										<li><a href="dev/flatform/app/list">删除简历</a>
+										</li>
+                                        <li><a href="dev/flatform/app/list">增加简历</a>
+										</li>
+									</ul></li>
+								<li><a><i class="fa fa-fire"></i>投递情况<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">查看信息</a>
+										</li>
+										<li><a href="dev/flatform/app/list">取消投递</a>
+										</li>
+                                        <li><a href="dev/flatform/app/list">删除投递信息</a>
+										</li>
+									</ul></li>
+                                <li><a><i class="fa fa-bar-chart"></i>职位薪资分布<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">职位分布</a>
+										</li>
+										<li><a href="dev/flatform/app/list">薪资分布</a>
+										</li>
+                                    </ul></li>
+                                <li><a><i class="fa fa-tint"></i>企业信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">查看信息</a>
+										</li>
+										<li><a href="dev/flatform/app/list">修改信息</a>
+										</li>
+                                        <li><a href="dev/flatform/app/list">删除信息</a>
+										</li>
+									</ul></li>
+                                 <li><a><i class="fa fa-odnoklassniki"></i>企业招聘信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">查看信息</a>
+										</li>
+										<li><a href="dev/flatform/app/list">修改信息</a>
+										</li>
+                                        <li><a href="dev/flatform/app/list">删除信息</a>
+										</li>
+									</ul></li>
+                                 <li><a><i class="fa fa-renren"></i>申请人审核<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="dev/flatform/app/list">审核信息</a>
+										</li>
+									</ul></li>
+							</ul>
+						</div>
+
+
+					</div>
+					<!-- /sidebar menu -->
+
+					<!-- /menu footer buttons -->
+					<div class="sidebar-footer hidden-small">
+						<a data-toggle="tooltip" data-placement="top" title="Settings">
+							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
+							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
+							href="dev/logout"> <span
+							class="glyphicon glyphicon-off" aria-hidden="true"></span> </a>
+					</div>
+					<!-- /menu footer buttons -->
+				</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div class="nav_menu">
+					<nav>
+						<div class="nav toggle">
+							<a id="menu_toggle"><i class="fa fa-bars"></i>
+							</a>
+						</div>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img
+									src="/static/images/img.jpg"
+									alt="">{{request.session.realName}} <span
+									class=" fa fa-angle-down"></span> </a>
+								<ul class="dropdown-menu dropdown-usermenu pull-right">
+									<li><a
+										href="dev/logout"><i
+											class="fa fa-sign-out pull-right"></i> Log Out</a>
+									</li>
+								</ul></li>
+
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="right_col" role="main">
+				<div class="">
+
+<div class="clearfix"></div>
+{% block main%}
+{% endblock main%}
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- /page content -->
+<!-- footer content -->
+<footer>
+	<div class="pull-right">©2016 All Rights Reserved.</div>
+	<div class="clearfix"></div>
+</footer>
+
+
+<!-- /footer content -->
+
+   <!-- jQuery -->
+    <script src="/static/admin/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/admin/js/bootstrap.min.js"></script>
+
+    <script src="/static/admin/js/custom.min.js"></script>
+  
+</body>
+</html>

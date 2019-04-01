@@ -1,0 +1,101 @@
+@charset=utf-8;
+
+form#payment {
+
+    background: white;
+
+    -webkit-border-radius: 5px;
+
+    border-radius: 5px;
+
+    padding: 20px;
+
+    width: 400px;
+
+    margin:auto;
+
+}
+
+form#payment fieldset {
+
+    border: none;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+form#payment legend {
+
+    color: #384313;
+    margin-left:10px;
+    font-size: 16px;
+
+    font-weight: bold;
+
+    padding-bottom: 10px;
+
+    text-shadow: 0 1px 1px #c0d576;
+
+}
+
+
+
+
+form#payment ol li {
+
+    background: #b9cf6a;
+
+    background: rgba(255, 255, 255, .3);
+
+    border-color: #e3ebc3;
+
+    border-color: rgba(255, 255, 255, .6);
+
+    border-style: solid;
+
+    border-width: 2px;
+
+    -webkit-border-radius: 5px;
+
+    line-height: 30px;
+
+    list-style: none;
+
+    padding: 5px 10px;
+
+    margin-bottom: 2px;
+
+}
+
+
+form#payment label {
+
+    float: left;
+
+    font-size: 13px;
+
+    width: 110px;
+
+}
+
+
+
+form#payment input:not([type=radio]), form#payment textarea,select {
+
+    background: #ffffff;
+
+    border: #FC3 solid 1px;
+
+    -webkit-border-radius: 3px;
+
+    font: italic 13px Georgia, "Times New Roman", Times, serif;
+
+    outline: none;
+
+    padding: 5px;
+
+    width: 200px;
+
+}

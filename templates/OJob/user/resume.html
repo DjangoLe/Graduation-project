@@ -1,0 +1,87 @@
+{% extends 'OJob/user/main.html'%}
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="/static/main/css/resume.css">
+{% endblock linkscript%}
+{% block main%}
+
+<form id="payment" action="">
+    {% csrf_token %}
+    <fieldset>
+        <legend>用户详细资料</legend>
+        <ol>
+            <li>
+                <label>真实姓名：</label>
+                <input type="text" name="realname"/>
+            </li>
+            <li>
+                <label>年龄：</label>
+                <input type="text" name="age"/>
+            </li>
+            <li>
+                <label>性别：</label>
+                <a><input type="radio" name="sex" value="man" checked/>男</a>
+                &nbsp&nbsp&nbsp
+                <a><input type="radio" name="sex" value="woman"/>女</a>
+            </li>
+            <li>
+                <label>工作经验：</label>
+                <select name="exp">
+                  <option value="no">无经验</option>
+                  <option value="one">一年</option>
+                  <option value="two">两年</option>
+                  <option value="three">两年以上</option>
+                </select>
+            </li>
+
+            <li>
+                <label>电话：</label>
+                <input type="text" name="tel"/>
+            </li>
+
+            <li>
+                <label>语言：</label>
+                <input type="text" name="language"/>
+            </li>
+
+            <li>
+                <label>理想职位：</label>
+                <input type="text" name="goalseat"/>
+            </li>
+            <li>
+                <label>学历：</label>
+                <input type="text" name="edu"/>
+            </li>
+
+            <li>
+                <label>自我评价：</label>
+                <input type="text" name="evalu"/>
+            </li>
+        </ol>
+    </fieldset>
+
+    <input style="width:100px;margin-left:10px;" type="submit" value="提交" id="btn"/>
+
+
+</form>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    document.getElementById("btn").onclick=
+    function(){
+      $.ajax({
+         type:"post",
+         url:"/perfect_resume/",
+         data:$("#payment").serialize(),
+         dataType:"json",
+         success:function(data,status){
+            alert(data["data"])
+            if(data["data"]=="填写简历成功,请点击确定跳往主界面")
+            {
+               window.location.href="/main/"
+            }
+         }
+      })
+    }
+})
+</script>
+{% endblock main%}

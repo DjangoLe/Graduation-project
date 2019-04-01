@@ -1,0 +1,66 @@
+{% extends 'OJob/user/main.html'%}
+{% block linkscript %}
+<link rel="stylesheet" type="text/css" href="/static/main/css/job.css">
+<script src="/static/main/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("button").bind("click", function() {
+					$.ajax({
+						type: "get",
+						url: "http://v.juhe.cn/toutiao/index?type=keji&key=4c52313fc9247e5b4176aed5ddd56ad7",
+						async: true,
+						success: function(data) {
+							console.log(data);
+						}
+					});
+                });
+            })
+		</script>
+{% endblock linkscript%}
+{% block main%}
+  {% for item in lmlist1 %}
+ <div class="jzList_item"  style="height:70px">
+     <div class="jzList_txt" style="padding-top:5px;">
+         <p style="margin-bottom:3px;">查看的内容：</p>
+         <div class="jzList_txt_t"><h4><a>{{item.uname}}</a></h4></div>
+         <div class="jzList_txt_field">
+          <ul>
+            <li><span>主题：</span>{{item.title}}</li>
+            <li><span>留言内容：</span>{{item.content}}</li>
+         </ul>
+         </div>
+
+    </div>
+ </div>
+ <div class="line"></div>
+  {% endfor%}
+  {% for item in lmlist %}
+  <div class="jzList_item" style="height:70px">
+     <div class="jzList_txt">
+         <div class="jzList_txt_t"><h4><a>{{item.uname}}</a></h4></div>
+         <div class="jzList_txt_field">
+          <ul>
+            <li><span>主题：</span>{{item.title}}</li>
+            <li><span>留言内容：</span>{{item.content}}</li>
+         </ul>
+         </div>
+
+    </div>
+ </div>
+<div class="line"></div>
+
+  {% endfor%}
+<div class="center">
+  <ul class="pagination">
+    <li><a href="#">«</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li><a href="#">7</a></li>
+    <li><a href="#">»</a></li>
+  </ul>
+</div>
+{% endblock main%}
