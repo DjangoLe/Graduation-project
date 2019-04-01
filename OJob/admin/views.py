@@ -5,5 +5,13 @@ import time,re
 from django.http import HttpResponse
 from OJob.models import user,wkaddrs,reply,hangye,jobmge,leavemge,usernote
 def base(request):
-    jmlist1=jobmge.objects.all()[0:4]
-    return render(request,'OJob/admin/user_mag.html',{'list1':jmlist1})
+    userlist=user.objects.all()
+    username = request.session.get('username')
+    return render(request,'OJob/admin/user_mag.html',{'list1':userlist,'username':username})
+def user_mag(request):
+    username = request.session.get('username')
+    userlist=user.objects.filter(uname=username)
+    return render(request,'OJob/user/update_usernote.html',{'list':userlist})
+def usernote_mag(request):
+    username = request.session.get('username')
+    usernotelist=usernote.objects.get("username")

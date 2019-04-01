@@ -34,6 +34,7 @@ def login(request,id):
        if request.method == "POST":
         username=request.POST.get("username")
         passwd=request.POST.get("passwd")
+        print("*****************************")
         try:
             flag1=user.objects.get(uname=username,upasswd=passwd)
         except:
@@ -170,4 +171,5 @@ def leamge(request,judge1):
     return render(request,"OJob/user/show_lmessage.html",{'lmlist1':lmlist1,"lmlist":lmlist})
 
 def backstage(request):
-    return render(request,"OJob/admin/base.html")
+    username = request.session.get('username')
+    return render(request,"OJob/admin/base.html",{"username":username})

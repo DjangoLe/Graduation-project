@@ -1,0 +1,117 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+{% endblock linkscript%}
+   <div class="row">
+
+               	   <div class="col-md-12" style="
+						    padding-left: 17px;
+						    margin-left: 5px;
+						">
+						<div class="x_panel">
+							<div class="x_title">
+								<h4>
+									用户信息管理 <i class="fa fa-user"></i>
+								</h4>
+
+							</div>
+							<div class="x_content" >
+								<br />
+								<form >
+									用户名：<input type="text"  name="user"/>&nbsp;&nbsp;&nbsp;
+									工作地址：<input type="text"  name="user"/>&nbsp;&nbsp;&nbsp;
+									      <input type="submit" value="查询" style="width: 80px;"/>
+									&nbsp;&nbsp;&nbsp;(用户信息查询)
+								</form>
+								<br>
+
+						    </div>
+					   </div>
+				   </div>
+
+				</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_content">
+							<p class="text-muted font-13 m-b-30"></p>
+							<div id="datatable-responsive_wrapper"
+								class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+								<div class="row">
+									<div class="col-sm-12">
+									<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+											cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+											<thead>
+												<tr role="row">
+													<th class="sorting_asc" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														aria-label="First name: activate to sort column descending"
+														aria-sort="ascending">编号</th>
+													<th class="sorting" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														aria-label="Last name: activate to sort column ascending">
+														招聘岗位</th>
+													<th class="sorting" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														aria-label="Last name: activate to sort column ascending">
+														工作地点</th>
+												    <th class="sorting_asc" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														aria-label="First name: activate to sort column descending"
+														aria-sort="ascending">修改</th>
+												    <th class="sorting_asc" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														aria-label="First name: activate to sort column descending"
+														aria-sort="ascending">删除</th>
+												</tr>
+											</thead>
+										 {% for u in list1%}
+											<tbody>
+
+				       									 <tr role="row" class="odd">
+
+															 <td>{{u.id}}</td><td tabindex="0" class="sorting_1">{{u.jposition}}</td><td>{{u.jplace}}</td>
+															 <td><a>修改</a></td><td><a>删除</a></td>
+
+				       									 </tr>
+
+
+
+											</tbody>
+										{% endfor%}
+										</table>
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="dataTables_info" id="datatable-responsive_info"
+											role="status" aria-live="polite">共10条记录
+											1/2页</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="dataTables_paginate paging_simple_numbers"
+											id="datatable-responsive_paginate">
+											<ul class="pagination">
+
+
+													<li class="paginate_button "><a
+														href="javascript:page_nav(document.forms[0],2);"
+														aria-controls="datatable-responsive" data-dt-idx="1"
+														tabindex="0">下一页</a>
+													</li>
+													<li class="paginate_button next"><a
+														href="javascript:page_nav(document.forms[0],2);"
+														aria-controls="datatable-responsive" data-dt-idx="7"
+														tabindex="0">最后一页</a>
+													</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				    </div>
+{% endblock main%}

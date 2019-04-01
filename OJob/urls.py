@@ -2,6 +2,7 @@ from django.conf.urls import url
 from OJob import views as views
 from OJob.admin import views as v
 urlpatterns=[
+   #用户界面
    url(r'^main/$', views.main),
    url(r'^login/(\d+)/$', views.login),
    url(r'^queryjob/$', views.queryjob),
@@ -14,6 +15,8 @@ urlpatterns=[
    url(r'^register/$', views.register),
    url(r'^perfect_register/$', views.perfect_register),
    url(r'^backstage/$', views.backstage),
-
+   #管理员界面
    url(r'^base/$', v.base),
+   url(r'^user_mag/$',v.user_mag),
+   url(r'^usernote_mag/$',v.usernote_mag),
 ]

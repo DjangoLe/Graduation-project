@@ -23,13 +23,19 @@ class usernote(models.Model):
     goalseat=models.CharField(max_length=50)
     edubg=models.CharField(max_length=50)
     evaluation=models.CharField(max_length=100)
+    uuser=models.ForeignKey("user")
 #留言表
 class leavemge(models.Model):
     uname=models.CharField(max_length=20)
     title=models.CharField(max_length=20)
     content=models.CharField(max_length=20)
     date=models.DateTimeField()
-
+    uuser = models.ForeignKey("user")
+#公司表
+class company(models.Model):
+    cname=models.CharField(max_length=20)
+    cplace=models.CharField(max_length=20)
+    ctel=models.CharField(max_length=20)
 #招聘信息表
 class jobmge(models.Model):
     jposition=models.CharField(max_length=20)
@@ -42,12 +48,15 @@ class jobmge(models.Model):
     epcontent=models.CharField(max_length=100)
     boon=models.CharField(max_length=20)
     settime=models.DateTimeField()
+    ccompany=models.ForeignKey("company")
 #公司回应表
 class reply(models.Model):
     realname=models.CharField(max_length=20)
     epname = models.CharField(max_length=20)
     substance=models.CharField(max_length=100)
     isenter=models.IntegerField()
+    ccompany = models.ForeignKey("company")
+    uuser = models.ForeignKey("user")
 #工作地点表
 class wkaddrs(models.Model):
     addrs=models.CharField(max_length=50)
