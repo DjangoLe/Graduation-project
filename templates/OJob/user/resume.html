@@ -64,18 +64,19 @@
 
 </form>
 <script type="text/javascript">
-
 $(document).ready(function(){
     document.getElementById("btn").onclick=
     function(){
+
       $.ajax({
          type:"post",
          url:"/perfect_resume/",
          data:$("#payment").serialize(),
          dataType:"json",
+         async : false,
          success:function(data,status){
             alert(data["data"])
-            if(data["data"]=="填写简历成功,请点击确定跳往主界面")
+            if(data.data=="success")
             {
                window.location.href="/main/"
             }

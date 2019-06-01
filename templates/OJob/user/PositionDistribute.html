@@ -1,0 +1,27 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/user_mag.css">
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+{% endblock linkscript%}
+<div class="layui-card">
+  <div class="layui-card-header">招聘职位分布</div>
+  <div class="layui-card-body">
+    以下为对所有招聘信息中的职位进行分析<br>
+    数据分析（直方图）
+  </div>
+</div>
+<div class="layui-row">
+
+  <div class="layui-col-md5 layui-col-md-offset3">
+    <img src="/static/admin/img/position.jpg" alt="#" style="margin-top:40px;">
+  </div>
+</div>
+
+
+{% endblock main%}

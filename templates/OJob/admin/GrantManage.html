@@ -1,0 +1,122 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/user_mag.css">
+    <!--<script src="/static/admin/js/xadmin.js"></script>-->
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+{% endblock linkscript%}
+
+
+    <div class="x-nav">
+
+        <a href="">首页/</a>
+        <a href="">演示</a>
+        <a>
+          <cite>/用户权限管理</cite></a>
+
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="glyphicon glyphicon-circle-arrow-right" style="line-height:30px"></i></a>
+    </div>
+    <div class="x-body">
+    <button type="button" class="btn btn-success" >用户权限绑定</button>
+      <table class="layui-table">
+        <thead>
+          <tr>
+
+            <th>ID</th>
+            <th>登录名</th>
+            <th>地址</th>
+            <th>电话</th>
+            <th>绑定公司</th>
+            <th>绑定管理员</th>
+        </thead>
+        {%for item in userlist%}
+        <tbody>
+          <tr>
+
+            <td>{{item.id}}</td>
+            <td>{{item.uname}}</td>
+            <td>{{item.uaddress}}</td>
+            <td>{{item.telephone}}</td>
+
+
+            <td>
+
+              <button type="button" class="btn btn-info" onclick="x_admin_show('绑定信息','/AddGrant/'+{{item.id}})">绑定</button>
+              </a>
+            </td>
+              <td>
+              <button type="button" class="btn btn-danger" onclick="grant_bind(this,{{item.id}})">绑定</button>
+              </a>
+              </td>
+
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="page">
+        <div>
+          <a class="prev" href="/ManageGrant/{{id|add:-1}}">&lt;&lt;</a>
+          <span class="current">第{{id}}页</span>
+
+          <a class="next" href="/ManageGrant/{{id|add:1}}">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+<script>
+    function x_admin_show(title,url,w,h){
+
+    if (w == null || w == '') {
+        w=($(window).width()*0.9);
+    };
+    if (h == null || h == '') {
+        h=($(window).height() - 50);
+    };
+
+    layer.open({
+        type: 2,
+        area: [w+'px', h +'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade:0.4,
+        title: title,
+        content: url
+    });
+}
+
+      function grant_bind(obj,id){
+          layer.confirm('确认要绑定吗？',function(index){
+
+          $.ajax({
+              type : "post",
+              url : "/BindAdmin/",
+              async : true,
+              data : {
+                  "id" : id
+              },
+              dataType : "json",
+              async : false,
+              // 成功后开启模态框
+              success : function(data,status) {
+
+                 layer.msg('已绑定管理员!',{icon:1,time:1000});
+              },
+              error : function() {
+                  alert("请求失败");
+              },
+
+          });
+
+          });
+      }
+</script>
+
+
+{% endblock main%}

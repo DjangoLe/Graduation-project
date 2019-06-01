@@ -2,6 +2,7 @@
 {% block main%}
 {% block linkscript %}
  <link rel="stylesheet" type="text/css" href="/static/main/css/job.css">
+ <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
 {% endblock linkscript%}
 
 {% for item2 in jmlist1%}
@@ -11,31 +12,52 @@
                 <div class="jzList_txt_field">
                     <ul>
                         <li><span>工作地点：</span>{{item2.jplace}}</li>
-                        <li><span>兼职类型：</span>{{item2.mgetype}}</li>
-                        <li><span>工作福利：</span>{{item2.boon}}</li>
+                        <li><span>工作经验：</span>{{item2.workexp}}</li>
+                        <li><span>工作技能：</span>{{item2.jskill}}</li>
                         <li><span>招聘人数：</span>{{item2.jcount}}人</li>
                     </ul>
                 </div>
      </div>
             <div class="jzList_salary">薪资:{{item2.jwages}} 元/月</div>
             <div class="jzList_btn">
-                <a class="login-reg" href="/job_detail/">报名参加</a>
+                <a class="login-reg"  onclick="x_admin_show('工作详情','/jobdetail/{{item2.id}}')">详情</a>
             </div>
  </div>
  <div class="line"></div>
 
 {% endfor%}
     <div class="center">
-      <ul class="pagination">
-        <li><a href="#">«</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">»</a></li>
+      <ul class="pagination" style="
+    margin-top: 137px;
+    margin-left: 99px;
+">
+        <li><a href="/main/{{id|add:-1}}/">«</a></li>
+        <li><a href="#" style="background-color:#c40000;">{{id}}</a></li>
+        <li><a href="/main/{{id|add:1}}/">»</a></li>
       </ul>
     </div>
+<script src="/static/admin/layui/layui.js"></script>
+<script src="/static/admin/js/xadmin.js"></script>
+<script>
+function x_admin_show(title,url,w,h){
+
+    if (w == null || w == '') {
+        w=($(window).width()*0.5);
+    };
+    if (h == null || h == '') {
+        h=($(window).height() - 150);
+    };
+
+    layer.open({
+        type: 2,
+        area: [w+'px', h +'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade:0.4,
+        title: title,
+        content: url
+    });
+}
+</script>
 {% endblock main%}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+
+</head>
+<body>
+     <div class="x-body">
+
+
+       <!--suppress XmlDuplicatedId -->
+         <form class="layui-form" id="user_form" action="">
+            {% csrf_token %}
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>用户名
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"  id="username" name="uname" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value={{uname}} readonly="readonly">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>公司名
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"  id="phone" name="cpname" required=""
+                  autocomplete="off" class="layui-input">
+              </div>
+
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>职位
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"  name="jposition" required=""
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+
+
+
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+              </label>
+              <!--suppress XmlDuplicatedId -->
+              <button  class="layui-btn"  id="btn">
+                  确认
+              </button>
+          </div>
+       </form>
+
+
+    </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    document.getElementById("btn").onclick=function()
+    {
+
+      $.ajax({
+         type:"post",
+         url:"/AddDeliver/",
+         data:$("#user_form").serialize(),
+         dataType:"json",
+         async : false,
+         success:function(data,status){
+            if(data["data"]=="error")
+            {
+              alert("您已投递过申请")
+            }else{
+                if(data["data"]=="error1")
+                {
+                    alert("您填写的公司或者职位不存在")
+                }
+
+                else{
+                  alert("投递成功")
+                  window.parent.location.reload();
+                  x_admin_close()
+                }
+            }
+           }
+      });
+
+    }
+})
+function x_admin_close(){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}
+</script>
+</body>
+</html>

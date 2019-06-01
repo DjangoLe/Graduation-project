@@ -1,49 +1,48 @@
 {% extends 'OJob/user/main.html'%}
 {% block linkscript %}
  <link rel="stylesheet" type="text/css" href="/static/main/css/leavemessage.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
 {% endblock linkscript%}
 {% block main%}
 
-    <form action="" class="dark-matter">
+    <form action="/perfect_leavemge/" class="dark-matter" method="post" onsubmit="return check()">
         {% csrf_token %}
-        <h1></h1>
+        <br><br>
         <label>
         <span>用户名 :</span>
-        <input id="name" type="text" name="name" value={{username}} />
+        <input id="name" type="text" name="name" value={{username}} readonly="readonly"/>
         </label>
         <label>
         <span>主题 :</span>
-        <input  type="text" name="subject" />
+        <input  type="text" name="subject" id="subject1"/>
         </label>
 
         <label>
         <span>留言内容 :</span>
-        <textarea id="message" name="mge" ></textarea>
+        <textarea id="message" name="mge" id="mge1"></textarea>
         </label>
         <label>
         <span>&nbsp;</span>
-        <input type="submit" class="button" id="btn" value="Send" />
+        <input type="submit" class="button" id="btn" value="Send" />&nbsp;&nbsp;&nbsp;{{data}}
         </label>
     </form>
 <script type="text/javascript">
 
-$(document).ready(function(){
-    document.getElementById("btn").onclick=
-    function(){
-      $.ajax({
-         type:"post",
-         url:"/perfect_leavemge/",
-         data:$(".dark-matter").serialize(),
-         dataType:"json",
-         success:function(data,status){
-            alert(data["data"])
-            if(data["data"]=="填写留言信息成功,请点击确定跳往主界面")
-            {
-               window.location.href="/main/"
-            }
-         }
-      })
+    function check(){
+      if($("#subject1").val()=="")
+      {
+        alert("主题不能为空")
+        return false;
+      }
+      else if($("#mge1").val()=="")
+      {
+        alert("留言不能为空")
+        return false;
+      }
+      else{
+        return true;
+      }
     }
-})
+
 </script>
 {% endblock main%}

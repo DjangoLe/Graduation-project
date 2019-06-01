@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+
+
+
+</head>
+<body>
+     <div class="x-body">
+
+
+       <!--suppress XmlDuplicatedId -->
+         <form class="layui-form" id="user_form" action="">
+            {% csrf_token %}
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>用户id
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text" name="id" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" readonly="readonly" value={{id}}>
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>公司名
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"   name="company" required="" lay-verify="phone"
+                  autocomplete="off" class="layui-input">
+              </div>
+
+
+
+
+          <br>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+              </label>
+              <!--suppress XmlDuplicatedId -->
+              <button  class="layui-btn"  id="btn" onclick="grant_bind(this,{{item.id}})">
+                  确认
+              </button>
+          </div>
+       </form>
+
+
+    </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    document.getElementById("btn").onclick=function()
+    {
+
+      $.ajax({
+         type:"post",
+         url:"/BindCompany/",
+         data:$("#user_form").serialize(),
+         dataType:"json",
+         async : false,
+         success:function(data,status){
+            if(data["data"]=="error")
+            {
+              alert("不存在该公司")
+            }
+            else{
+              alert("绑定成功")
+              window.parent.location.reload();
+              x_admin_close()
+            }
+           }
+      });
+
+    }
+})
+function x_admin_close(){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}
+</script>
+</body>
+</html>

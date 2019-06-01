@@ -1,31 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="/static/main/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/static/main/css/bootstrap.min.css">
+    <link href="/static/main/css/bootstrap.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="/static/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/main/css/login.css" rel="stylesheet">
 
-  </head>
+    <script src="/static/admin/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/admin/js/bootstrap.min.js"></script>
 
-  <body class="login">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
+    <div>
+        <div class="be-content pren">
 
-    <form action="/login/2/" class="dark-matter" method="post" style="margin-top: 240px;margin-left: 360px;">
-        {% csrf_token %}
-        <h1></h1>
-        <label>
-        <span>账号 :</span>
-        <input id="name" type="text" name="username"  />
-        </label>
-        <label>
-        <span>密码 :</span>
-        <input  type="text" name="passwd" />
-        </label>
+            <div class="ioc_text">
 
-        <input type="submit" class="button" value="登陆" />
-        </label>
-    </form>
-        <a href="/register/">注册</a>
-  </body>
+                <span>欢迎来到,岁岁兼职网</span>
+            </div>
+
+            <div>
+                <form  id="logindata" action="/login/2/"  method="post" onsubmit="return check()">
+                   {% csrf_token %}
+                    <div class="br-content">
+
+                         <div class="input-group mb-4 bootint">
+                             <div class="input-group-prepend">
+                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
+                             </div>
+                             <input type="text" class="form-control" placeholder="Username" name="username" id="uname">
+                         </div>
+
+                         <div class="input-group mb-4 bootint">
+                             <div class="input-group-prepend">
+                                 <span class="input-group-text"><i class="fa fa-unlock-alt"></i></span>
+                             </div>
+                             <input type="password" class="form-control" placeholder="Your Password" name="passwd" id="passwd1">
+                         </div>
+
+                        <div class="br-text">
+                            <p>
+                                <span>用户注册?</span>
+                                <a href="/register/">注册</a>&nbsp;&nbsp;
+                                <span style="font-color:red;">{{data}}</span>
+                            </p>
+                        </div>
+                        <div style="padding-top: 10px">
+                            <button  class="btn"  id="btn" >登录</button>
+                        </div>
+                        <div class="be-con">
+                            <span>软工1504--20152203237-- <a href="">高运乐</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+<script type="text/javascript">
+function check(){
+
+      if($("#uname").val()=="")
+      {
+         alert("账号不能为空")
+         return false;
+      }
+      else if($("#passwd1").val()=="")
+      {
+         alert("密码不能为空")
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+
+    }
+
+</script>
+
+</body>
 </html>

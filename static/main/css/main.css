@@ -25,8 +25,26 @@ textarea,input,select,button{font-family: "microsoft yahei";}
 .topper-nav{float:right;display:inline;text-align:right;color:#aaa;}
 .topper-nav a{margin-left:10px;margin-right:10px;}
 
-.header-title{padding:20px 0;}
-.header-logo{float:left;display:inline;height:63px;line-height:63px;font-size:50px;color:#af0000;}
+.header-title{padding:20px 0;height:100px;}
+.header-logo{float:left;display:inline;height:63px;line-height:63px;font-size:30px;color:#af0000;}
+h1 {
+  font-size: 55px;
+
+  line-height: 1.2;
+  margin: 0.3em 0;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+
+}
+
+.one {
+  background-image: linear-gradient(to right, #c40000 45%,#4b4343 55%);
+
+
+}
+
 
 .header-somewords{float:right;display:inline;height:50px;line-height:130px;font-size:15px;color:#af0000;margin-right:100px;}
 

@@ -1,0 +1,60 @@
+{% extends 'OJob/user/main.html'%}
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="/static/main/css/resume.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+{% endblock linkscript%}
+{% block main%}
+
+<form id="payment" action="/per_cpyregister/" method="post"  onsubmit="return check()">
+    {% csrf_token %}
+    <fieldset>
+        <legend>注册公司</legend>
+        <ol>
+            <li>
+                <label>公司名：</label>
+                <input type="text" name="uname" id="uname1"/>
+            </li>
+            <li>
+                <label>公司地址：</label>
+                <input type="text" name="addrs" id="addrs1"/>
+            </li>
+
+            <li>
+                <label>电话：</label>
+                <input type="text" name="tel" id="tel1"/>
+            </li>
+
+        </ol>
+    </fieldset>
+
+    <input  type="submit" id="btn" style="width:100px;margin-left:10px;" value="提交"/>&nbsp;&nbsp;&nbsp;{{data}}
+
+
+</form>
+<!--<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>-->
+<script type="text/javascript">
+    function check(){
+      if($("#uname1").val()=="")
+      {
+         alert("公司名不能为空")
+         return false;
+      }
+      else if($("#addrs1").val()=="")
+       {
+         alert("地址不能为空")
+         return false;
+       }
+      else if($("#tel1").val()=="")
+       {
+         alert("电话不能为空")
+         return false;
+       }
+       else
+       {
+          return true;
+       }
+
+    }
+
+</script>
+{% endblock main%}

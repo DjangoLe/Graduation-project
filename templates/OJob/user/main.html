@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-<!doctype html>
+<! doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,29 +20,24 @@
 <![endif]-->
 </head>
 <body>
-<img src="2.png" alt=""/>
+
     <div class="wrapper">
         <div class="topper clearfix">
             <div class="topper-nav">
-                <a href="#">设为首页</a>|<a href="#">加入收藏</a>
+                <a href="#" style="font-size:12px;">设为首页</a>|<a href="#" style="font-size:12px;">加入收藏</a>
             </div>
         </div>
         <div class="header">
-<div class="header-title clearfix">
-			<a href="index.html" class="header-logo"><img src="/static/main/img/logo.png" ></a>
-			<p class="header-somewords">我们擅长做项目管理，看板管理，一个产品也生产并及时交货</p>
+        <div class="header-title clearfix">
+			<a class="header-logo"><h1 class="one" style="font-family:'FZShuTi';font-size:58px;">岁岁兼职网</h1></a>
+			<p class="header-somewords" style="font-family:'FZShuTi';font-size:25px;margin-right: 10px;margin-top: 10px;">欢迎来到，岁岁兼职网</p>
 		</div>
             <div class="header-nav">
                 <ul class="header-nav-list clearfix">
-                    <li class="nav-one"><a href="/main/" class="nav-tit">首页</a> </li>
+                    <li class="nav-one"><a href="/main/1/" class="nav-tit">首页</a> </li>
                     <li class="nav-one"><a href="/register/" class="nav-tit">求职注册</a> </li>
-                    <li class="nav-one"><a href="/resume/" class="nav-tit">填写简历</a> </li>
-                    <li class="nav-one"><a href="#" class="nav-tit">信息管理</a>
-                    <ul class="header-nav2-list">
-						<li><a href="/usernote_mag/">个人简历管理</a></li>
-						<li><a href="/user_mag/">个人信息管理</a></li>
-						<li><a href="/backstage/">后台管理</a></li>
-					</ul>
+                    <li class="nav-one"><a href="/cpyregister/" class="nav-tit">注册公司</a> </li>
+                    <li class="nav-one"><a href="/backstage/" class="nav-tit">信息管理</a>
                     </li>
                     <li class="nav-one"><a href="/leavemessage/" class="nav-tit">网站留言</a></li>
                     <li class="nav-one"><a href="/login/1/" class="nav-tit">登陆</a> </li>
@@ -72,7 +67,7 @@
                     <li class="nav-one on"><a href="javascript:void(0);" class="nav-tit">地点分类</a>
                         <ul class="sidebar-nav2-list">
                             {% for item in addlist%}
-                            <li><a href="/queryposition/1/{{item.addrs}}/">{{item.addrs}}</a></li>
+                            <li><a href="/queryposition/1/{{item}}/">{{item}}</a></li>
                             {% endfor%}
                         </ul>
                     </li>
@@ -80,7 +75,7 @@
                     <li class="nav-one on"><a href="javascript:void(0);" class="nav-tit" id="position">岗位分类</a>
                         <ul class="sidebar-nav2-list" id="type">
                             {% for item1 in hylist%}
-                            <li><a href="/queryposition/2/{{item1.name}}/">{{item1.name}}</a></li>
+                            <li><a href="/queryposition/2/{{item1}}/">{{item1}}</a></li>
                             {% endfor%}
                         </ul>
                     </li>
@@ -123,7 +118,7 @@
 				</div>
 				<div class="news-list ellipsis-list">
                     {% for item2 in lmlist%}
-					<li><a href="/leamge/{{item2.title}}/">{{item2.title}}</a><span class="time">[{{item2.date|date:'Y-m-d'}}]</span></li>
+					<li><a href="/leamge/{{item2.title}}/1/">{{item2.title}}</a><span class="time">[{{item2.date|date:'Y-m-d'}}]</span></li>
                     {% endfor%}
 				</div>
 			</div>

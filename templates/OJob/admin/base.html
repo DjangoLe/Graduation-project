@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-<!DOCTYPE html>
+<! DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>APP开发者平台</title>
+<title>岁岁兼职网</title>
 
 	<!-- Bootstrap -->
 	<link href="/static/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,8 @@
 	<link href="/static/admin/css/font-awesome.min.css" rel="stylesheet">
     {% block linkscript %}
     {% endblock linkscript%}
-<link href="/static/admin/css/custom.min.css" rel="stylesheet">
+    <link href="/static/admin/css/custom.min.css" rel="stylesheet">
+	<script src="/static/admin/js/xadmin.js"></script>
 	<style>
 		.left_col{background:#2A3F54}
 		.nav-sm .container.body .col-md-3.left_col{min-height:100%;width:70px;padding:0;z-index:9999;position:absolute}
@@ -44,7 +45,7 @@
 			<div class="col-md-3 left_col menu_fixed">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-                        <a href="dev/flatform/main" class="site_title">&nbsp;&nbsp;&nbsp;<span>岁岁兼职网</span>
+                        <a  class="site_title">&nbsp;&nbsp;&nbsp;<span>岁岁兼职网</span>
 						</a>
 					</div>
 
@@ -54,7 +55,7 @@
 					<div class="profile">
 						<div class="profile_pic">
 							<img
-								src="/static/admin/img/img1.jpg"
+								src="/static/admin/img/img.jpg"
 								alt="..." class="img-circle profile_img"/>
 						</div>
 						
@@ -73,96 +74,126 @@
 						<div class="menu_section">
 							<h3>&nbsp; </h3>
 							<br/>
+
+
 							<ul class="nav side-menu">
 								<li><a><i class="fa fa-home"></i> 个人信息 <span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="/base/">修改密码</a>
-										</li>
-										<li><a href="javascript:;">修改信息</a>
+										<li><a href="/MyManage/">修改信息</a>
 										</li>
 									</ul></li>
+								{%ifequal upower 1 %}
+
 								<li><a><i class="fa fa-edit"></i>简历信息管理<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">修改简历</a>
+										<li><a href="/ManageResume/">查看信息</a>
 										</li>
-										<li><a href="dev/flatform/app/list">删除简历</a>
-										</li>
-                                        <li><a href="dev/flatform/app/list">增加简历</a>
-										</li>
+
 									</ul></li>
 								<li><a><i class="fa fa-fire"></i>投递情况<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">查看信息</a>
+										<li><a href="/ManageDeliver/1/">查看信息</a>
 										</li>
-										<li><a href="dev/flatform/app/list">取消投递</a>
-										</li>
-                                        <li><a href="dev/flatform/app/list">删除投递信息</a>
-										</li>
+
+
 									</ul></li>
-                                <li><a><i class="fa fa-bar-chart"></i>职位薪资分布<span
+                                <li><a><i class="fa fa-bar-chart"></i>职位地区分布<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">职位分布</a>
+										<li><a href="/PositionDistribute/">职位分布</a>
 										</li>
-										<li><a href="dev/flatform/app/list">薪资分布</a>
+										<li><a href="/PlaceDistribute/">地区分布</a>
 										</li>
                                     </ul></li>
-                                <li><a><i class="fa fa-tint"></i>企业信息管理<span
+								{%endifequal%}
+								{% ifequal upower 2 %}
+                                <li><a><i class="fa fa-tint"></i>企业信息<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">查看信息</a>
+										<li><a href="/ManageComInfo/">查看信息</a>
 										</li>
-										<li><a href="dev/flatform/app/list">修改信息</a>
-										</li>
-                                        <li><a href="dev/flatform/app/list">删除信息</a>
-										</li>
+
 									</ul></li>
-                                 <li><a><i class="fa fa-odnoklassniki"></i>企业招聘信息管理<span
+                                <li><a><i class="fa fa-odnoklassniki"></i>企业招聘信息管理<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">查看信息</a>
+										<li><a href="/ManageRecruitInfo/1/">查看信息</a>
 										</li>
-										<li><a href="dev/flatform/app/list">修改信息</a>
-										</li>
-                                        <li><a href="dev/flatform/app/list">删除信息</a>
-										</li>
+
 									</ul></li>
                                  <li><a><i class="fa fa-renren"></i>申请人审核<span
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="dev/flatform/app/list">审核信息</a>
+										<li><a href="/ManageAudit1/1/">审核信息</a>
 										</li>
 									</ul></li>
+								{%endifequal%}
+								{% ifequal upower 0 %}
+
+								<li><a><i class="fa fa-filter"></i>用户信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="/Manage_user/1">查看信息</a>
+										</li>
+
+									</ul></li>
+								<li><a><i class="fa fa-tint"></i>企业信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="/ManageCompany/1/">查看信息</a>
+										</li>
+
+									</ul></li>
+								<li><a><i class="glyphicon glyphicon-record"></i>&nbsp;&nbsp;&nbsp;地点信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="/ManagePlace/1/">查看信息</a>
+
+									</ul></li>
+								<li><a><i class="fa fa-edit"></i>留言信息管理<span
+										class="fa fa-chevron-down"></span>
+								</a>
+									<ul class="nav child_menu">
+										<li><a href="/ManageLeaveMge/1/">查看信息</a>
+										</li>
+
+									</ul></li>
+                                <li><a href="#"><i class="fa fa-renren"></i>审核招聘信息<span
+										class="fa fa-chevron-down"></span>
+								</a>
+								    <ul class="nav child_menu">
+										<li><a href="/ManageAudit/1/">查看信息</a>
+										</li>
+
+									</ul></li>
+								<li><a href="#"><i class="glyphicon glyphicon-text-background"></i>&nbsp;&nbsp;&nbsp;用户权限管理<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/ManageGrant/1/">查看信息</a></li>
+
+									</ul></li>
+
+								{%endifequal%}
 							</ul>
+
 						</div>
 
 
 					</div>
-					<!-- /sidebar menu -->
 
-					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Settings">
-							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
-							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
-							href="dev/logout"> <span
-							class="glyphicon glyphicon-off" aria-hidden="true"></span> </a>
-					</div>
-					<!-- /menu footer buttons -->
 				</div>
 			</div>
 
@@ -178,14 +209,12 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="/static/images/img.jpg"
-									alt="">{{username}} <span
+								aria-expanded="false">欢迎您： {{username}} <span
 									class=" fa fa-angle-down"></span> </a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a
-										href="dev/logout"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a>
+									<li>
+										<a href="/index/"><i class="fa fa-sign-out pull-right"></i> 回到主界面</a>
+										<a href="/quit/"><i class="fa fa-sign-out pull-right"></i> 退出</a>
 									</li>
 								</ul></li>
 
@@ -210,7 +239,7 @@
 <!-- /page content -->
 <!-- footer content -->
 <footer>
-	<div class="pull-right">©2016 All Rights Reserved.</div>
+	<div class="pull-right">软工1504-20152203237-高运乐</div>
 	<div class="clearfix"></div>
 </footer>
 

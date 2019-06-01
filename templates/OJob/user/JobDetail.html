@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>岗位详情页面</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+<link href="/static/main/css/jobdetail.css" rel="stylesheet" type="text/css" />
+<script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+
+    <div class="left">
+    	<div class="card shadow">
+        	<a href="#" class="select">详情页面</a>
+        </div>
+        {%for item in joblist%}
+        <div class="box1 shadow">
+        	<div class="tit">
+            	<h2>{{item.jposition}}</h2>
+                <div class="titText">
+                    <a class="btnC3 box1T3 fr">{{item.epname}}</a>
+                    <a href="#" class="btnC1 box1T1" onclick="member_join(this,{{item.id}})"><img src="/static/main/img/ico01.gif"/> 申请该职位</a>
+                    <a href="#" class="btnC2 box1T2" onclick="x_admin_close()"><img src="/static/main/img/ico02.gif"> 关闭</a>
+                </div>
+            </div>
+                <table class="TB1">
+                    <tr>
+                        <th>职位性质：</th>
+                        <td width="150">兼职</td>
+                        <th>针对人群：</th>
+                        <td>大学生</td>
+                    </tr>
+                    <tr>
+                        <th>招聘人数：</th>
+                        <td>{{item.jcount}}人</td>
+                        <th>工作经验：</th>
+                        <td>{{item.workexp}}</td>
+                    </tr>
+                    <tr>
+                        <th>工作地点：</th>
+                        <td>{{item.jplace}}</td>
+                        <th>性别要求：</th>
+                        <td>不限</td>
+                    </tr>
+                    <tr>
+                        <th>薪资待遇：</th>
+                        <td>{{item.jwages}}元/月</td>
+                        <th>发布日期：</th>
+                        <td>{{item.settime|date:'Y-m-d'}}</td>
+                    </tr>
+
+                </table>
+				<hr class="line" />
+				<table class="TB1">
+				    <tr>
+				        <th>职位描述：</th>
+				        <td>{{item.jskill}}<br />
+
+			        </tr>
+			    </table>
+            {%endfor%}
+				<hr class="line" />
+            {%for item2 in cplist%}
+				<table class="TB1">
+				    <tr>
+				        <th>公司名：</th>
+				        <td>{{item2.cname}}</td>
+                    </tr>
+                    <tr>
+                        <th>公司地点：</th>
+				        <td>{{item2.cplace}}</td>
+                    </tr>
+                    <tr>
+                        <th>公司电话：</th>
+				        <td>{{item2.ctel}}</td>
+			        </tr>
+			    </table>
+            {% endfor%}
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/admin/layui/layui.js"></script>
+<script src="/static/admin/js/xadmin.js"></script>
+<script>
+    function member_join(obj,id){
+          layer.confirm('确认要报名参加吗？',function(index){
+
+          $.ajax({
+              type : "post",
+              url : "/JoinJob/",
+              async : true,
+              data : {
+                  "id" : id
+              },
+              dataType : "json",
+              async : false,
+              // 成功后开启模态框
+              success : function(data,status) {
+                 if(data["data"]=="success")
+                 {
+                   layer.msg('报名成功!',{icon:1,time:1000});
+                 }
+                 else if(data["data"]=="error")
+                 {
+                   layer.msg('您已经报名!',{icon:0,time:1000});
+                 }
+                 else if(data["data"]=="error1")
+                 {
+                   layer.msg('请先登录!',{icon:0,time:1000});
+                 }
+                 else if(data["data"]=="error2")
+                 {
+                   layer.msg('请先填写简历!',{icon:0,time:1000});
+                 }
+              },
+              error : function() {
+                  alert("请求失败");
+              },
+
+          });
+
+          });
+      }
+   function x_admin_close(){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}
+</script>
+</body>
+</html>

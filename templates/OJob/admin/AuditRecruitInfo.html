@@ -1,0 +1,134 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/user_mag.css">
+    <!--<script src="/static/admin/js/xadmin.js"></script>-->
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+{% endblock linkscript%}
+
+
+    <div class="x-nav">
+
+        <a href="">首页/</a>
+        <a href="">演示</a>
+        <a>
+          <cite>/审核招聘信息</cite></a>
+
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" >
+        <i class="glyphicon glyphicon-circle-arrow-right" style="line-height:30px"></i></a>
+    </div>
+    <div class="x-body">
+     <button type="button" class="btn btn-success" >审核招聘信息</button>
+        <br>
+      <table class="layui-table">
+        <thead>
+          <tr>
+
+            <th>ID</th>
+            <th>公司名</th>
+            <th>职位</th>
+            <th>地点</th>
+            <th>招聘人数</th>
+            <th>工资(元/月)</th>
+            <th>技能</th>
+            <th>建立时间</th>
+              <td>状态</td>
+            <th>等待</th>
+            <th>通过</th>
+            <th>拒绝</th>
+        </thead>
+        {%for item in lmlist%}
+        <tbody>
+          <tr>
+
+            <td>{{item.id}}</td>
+            <td>{{item.epname}}</td>
+            <td>{{item.jposition}}</td>
+            <td>{{item.jplace}}</td>
+            <td>{{item.jcount}}</td>
+            <td>{{item.jwages}}</td>
+            <td>{{item.jskill}}</td>
+            <td>{{item.settime|date:'Y-m-d'}}</td>
+
+             <td>
+              {%ifequal item.isenter 0 %}
+                  <p>审核中</p>
+              {%endifequal%}
+              {%ifequal item.isenter 1 %}
+                  <p>通过</p>
+              {%endifequal%}
+              {%ifequal item.isenter 2 %}
+                  <p>拒绝</p>
+              {%endifequal%}
+            </td>
+            <td>
+              <button type="button" class="btn btn-success" onclick="audit(this,{{item.id}},0)">等待</button>
+            </td>
+              <td>
+              <button type="button" class="btn btn-info" onclick="audit(this,{{item.id}},1)">通过</button>
+              </a>
+            </td>
+              <td>
+              <button type="button" class="btn btn-danger" onclick="audit(this,{{item.id}},2)">拒绝</button>
+              </a>
+              </td>
+
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="page">
+        <div>
+          <a class="prev" href="/ManageAudit/{{id|add:-1}}">&lt;&lt;</a>
+          <span class="current">第{{id}}页</span>
+
+          <a class="next" href="/ManageAudit/{{id|add:1}}">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+<script>
+
+
+
+      /*用户-删除*/
+      function audit(obj,id,id2){
+
+          layer.confirm('确认要操作吗？',function(index){
+
+          $.ajax({
+              type : "post",
+              url : "/AuditRecruitInfo/",
+              async : true,
+              data : {
+                  "id" : id,
+                  "judge":id2
+              },
+              dataType : "json",
+              async : false,
+              // 成功后开启模态框
+              success : function(data,status) {
+
+                 window.location.reload();
+              },
+              error : function() {
+                  alert("请求失败");
+              },
+
+          });
+
+          });
+      }
+
+
+
+
+</script>
+
+
+{% endblock main%}

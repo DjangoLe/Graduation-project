@@ -1,0 +1,207 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/user_mag.css">
+    <!--<script src="/static/admin/js/xadmin.js"></script>-->
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+{% endblock linkscript%}
+
+
+    <div class="x-nav">
+
+        <a href="">首页/</a>
+        <a href="">演示</a>
+        <a>
+          <cite>/留言信息管理</cite></a>
+
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" >
+        <i class="glyphicon glyphicon-circle-arrow-right" style="line-height:30px"></i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" method="post" action="/QueryLeaveMge/" id="queryuser">
+          {% csrf_token %}
+          <input type="text" name="cname"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="cname">&nbsp;&nbsp;
+          <input type="text" name="title"  placeholder="请输入主题" autocomplete="off" class="layui-input" id="title">
+          <input id="file-submit" class="layui-btn" lay-submit lay-filter="demo1" value="提交" type="submit"/>
+          <!--<button class="layui-btn"  lay-submit="" lay-filter="sreach" id="querybtn"><i class="fa fa-search"></i></button>-->
+        </form>
+      </div>
+        <br>
+      <xblock>
+        <button type="button" class="btn btn-danger" onclick="delAll()"> 批量删除</button>
+        <button type="button" class="btn btn-success" onclick="x_admin_show('编辑留言信息','/LeaveMgeOperation/0/1/')">添加</button>
+
+      </xblock>
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>主题</th>
+            <th>留言信息</th>
+            <th>时间</th>
+            <th>修改</th>
+            <th>删除</th>
+        </thead>
+        {%for item in lmlist%}
+        <tbody>
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{item.id}}><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{{item.id}}</td>
+            <td>{{item.uname}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.content}}</td>
+            <td>{{item.date|date:'Y-m-d'}}</td>
+
+
+            <td>
+
+              <button type="button" class="btn btn-info" onclick="x_admin_show('编辑留言信息','/LeaveMgeOperation/1/'+{{item.id}})">修改</button>
+              </a>
+            </td>
+              <td>
+              <button type="button" class="btn btn-danger" onclick="member_del(this,{{item.id}})">删除</button>
+              </a>
+              </td>
+
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="page">
+        <div>
+          <a class="prev" href="/ManageLeaveMge/{{id|add:-1}}">&lt;&lt;</a>
+          <span class="current">第{{id}}页</span>
+
+          <a class="next" href="/ManageLeaveMge/{{id|add:1}}">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+<script>
+   tableCheck = {
+        init:function  () {
+            $(".layui-form-checkbox").click(function(event) {
+                if($(this).hasClass('layui-form-checked')){
+                    $(this).removeClass('layui-form-checked');
+                    if($(this).hasClass('header')){
+                        $(".layui-form-checkbox").removeClass('layui-form-checked');
+                    }
+                }else{
+                    $(this).addClass('layui-form-checked');
+                    if($(this).hasClass('header')){
+                        $(".layui-form-checkbox").addClass('layui-form-checked');
+                    }
+                }
+
+            });
+        },
+        getData:function  () {
+            var obj = $(".layui-form-checked").not('.header');
+            var arr=[];
+            obj.each(function(index, el) {
+                arr.push(obj.eq(index).attr('data-id'));
+            });
+            return arr;
+        }
+    }
+      //开启表格多选
+    tableCheck.init();
+
+
+
+
+    function x_admin_show(title,url,w,h){
+
+    if (w == null || w == '') {
+        w=($(window).width()*0.9);
+    };
+    if (h == null || h == '') {
+        h=($(window).height() - 50);
+    };
+
+    layer.open({
+        type: 2,
+        area: [w+'px', h +'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade:0.4,
+        title: title,
+        content: url
+    });
+}
+
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+          $.ajax({
+              type : "post",
+              url : "/DeleteLeaveMge/",
+              async : true,
+              data : {
+                  "id" : id
+              },
+              dataType : "json",
+              async : false,
+              // 成功后开启模态框
+              success : function(data,status) {
+                 $(obj).parents("tr").remove();
+                 layer.msg('已删除!',{icon:1,time:1000});
+              },
+              error : function() {
+                  alert("请求失败");
+              },
+
+          });
+
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+         var data1 = tableCheck.getData();
+
+         layer.confirm('确认要删除吗？',function(index){
+            //捉到所有被选中的，发异步进行删除
+            $.ajax({
+              type : "post",
+              url : "/DeleteAllLeaveMge/",
+              async : true,
+              data : {
+                  'list1': data1
+              },
+              dataType : "json",
+              async : false,
+              // 成功后开启模态框
+              success : function(data,status) {
+                 layer.msg('删除成功', {icon: 1});
+                 $(".layui-form-checked").not('.header').parents('tr').remove();
+              },
+              error : function() {
+                  alert("请求失败");
+              },
+
+          });
+
+        });
+      }
+</script>
+
+
+{% endblock main%}

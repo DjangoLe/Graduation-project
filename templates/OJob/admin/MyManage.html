@@ -1,0 +1,105 @@
+{% extends 'OJob/admin/base.html'%}
+{% block main%}
+{% block linkscript %}
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/user_mag.css">
+    <!--<script src="/static/admin/js/xadmin.js"></script>-->
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+{% endblock linkscript%}
+
+
+    <div class="x-nav">
+
+        <a href="">首页/</a>
+        <a href="">演示</a>
+        <a>
+          <cite>/个人信息</cite></a>
+
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="glyphicon glyphicon-circle-arrow-right" style="line-height:30px"></i></a>
+    </div>
+    <div class="x-body">
+      <button type="button" class="btn btn-success" >编辑用户信息</button>
+        <br>
+
+      <table class="layui-table">
+        <thead>
+          <tr>
+
+            <th>ID</th>
+            <th>登录名</th>
+            <th>地址</th>
+            <th>电话</th>
+            <th>个人信息</th>
+            <th>个人密码</th>
+        </thead>
+        {%for item in userlist%}
+        <tbody>
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.uname}}</td>
+            <td>{{item.uaddress}}</td>
+            <td>{{item.telephone}}</td>
+
+
+            <td>
+
+              <button type="button" class="btn btn-info" onclick="x_admin_show('编辑用户信息','/UserOperation/1/'+{{item.id}})">修改</button>
+
+            </td>
+            <td>
+
+              <button type="button" class="btn btn-danger" onclick="x_admin_show('修改密码','/UpdatePasswd/'+{{item.id}})">修改</button>
+
+            </td>
+
+
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="page">
+        <div>
+          <a class="prev" href="">&lt;&lt;</a>
+          <span class="current">第1页</span>
+
+          <a class="next" href="">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+<script>
+
+
+
+
+    function x_admin_show(title,url,w,h){
+
+    if (w == null || w == '') {
+        w=($(window).width()*0.9);
+    };
+    if (h == null || h == '') {
+        h=($(window).height() - 50);
+    };
+
+    layer.open({
+        type: 2,
+        area: [w+'px', h +'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade:0.4,
+        title: title,
+        content: url
+    });
+}
+
+
+</script>
+
+
+{% endblock main%}

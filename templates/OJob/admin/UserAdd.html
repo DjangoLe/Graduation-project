@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <script src="/static/admin/js/xadmin.js"></script>
+
+
+</head>
+<body>
+     <div class="x-body">
+
+
+       <!--suppress XmlDuplicatedId -->
+         <form class="layui-form" id="user_form" action="">
+            {% csrf_token %}
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>登录名
+              </label>
+              <div class="layui-input-inline">
+                  <input  type="text" required id="username" name="username"  class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>密码
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="password" id="L_pass" name="pass" required
+                  autocomplete="off" class="layui-input">
+              </div>
+
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>电话
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"  id="phone" name="phone" required
+                  autocomplete="off" class="layui-input">
+              </div>
+
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>地址
+              </label>
+              <div class="layui-input-inline">
+
+                  <input type="text"  name="address" id="address" required
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+
+
+
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+              </label>
+              <!--suppress XmlDuplicatedId -->
+              <button  class="layui-btn"  id="btn" >
+                  确认
+              </button>
+          </div>
+       </form>
+
+
+    </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    document.getElementById("btn").onclick=function()
+    {
+      if($("#username").val()=="")
+      {
+         layer.msg("账号不能为空",{icon:0})
+      }
+      else if($("#L_pass").val()=="")
+       {
+         layer.msg("密码不能为空",{icon:0})
+       }
+       else if($("#phone").val()=="")
+       {
+         layer.msg("电话不能为空",{icon:0})
+       }
+       else if($("#address").val()=="")
+       {
+         layer.msg("地址不能为空",{icon:0})
+       }
+      else{
+      $.ajax({
+         type:"post",
+         url:"/AddUser/",
+         data:$("#user_form").serialize(),
+         dataType:"json",
+         async : false,
+         success:function(data,status){
+            if(data["data"]=="error")
+            {
+              alert("用户名已存在")
+            }
+            else{
+              alert("成功")
+              window.parent.location.reload();
+              x_admin_close()
+            }
+           }
+      });
+      }
+
+    }
+})
+function x_admin_close(){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}
+</script>
+</body>
+</html>
